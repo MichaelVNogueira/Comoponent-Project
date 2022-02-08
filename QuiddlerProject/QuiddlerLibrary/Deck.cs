@@ -56,17 +56,30 @@ namespace QuiddlerLibrary
 
         public override string ToString()
         {
-            int cardsPerLine = 8;
-            int cardsPrinted = 0;
+
             StringBuilder sb = new();
             var availableCards = new Dictionary<string, int>();
             for(int i = _cardIndex; i < _cards.Count; i++)
-                availableCards[_cards[i]._rank]++;
+            {
+                if (availableCards.TryGetValue(_cards[i]._rank, out _))
+                    availableCards[_cards[i]._rank]++;
+                else
+                    availableCards.Add(_cards[i]._rank, 1);
+            }
 
-            foreach(var card in availableCards)
-                sb.Append(
-                    $"{ card.Key}({card.Value}){(cardsPrinted++ >= cardsPerLine ? '\n' : ' ')}"
-                );
+            int cardsPerLine = 8;
+            int cardsInLine = 0;
+
+            foreach (var card in availableCards)
+            {
+                sb.Append($"{ card.Key}({card.Value}) ");
+                if(++cardsInLine >= cardsPerLine)
+                {
+                    sb.Append('\n');
+                    cardsInLine = 0;
+                }
+            }
+ 
             return sb.ToString();
         }
 

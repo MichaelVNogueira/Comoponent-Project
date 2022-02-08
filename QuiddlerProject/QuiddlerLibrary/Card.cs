@@ -1,8 +1,10 @@
-﻿using System;
+﻿/*
+ * File:        Card.cs
+ * Date:        2022-02-08
+ * Authors:     Michael Nogueira, Alex D
+ * Description: This class represents a Card object in the Quiddler library
+ */
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuiddlerLibrary
 {

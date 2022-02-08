@@ -106,7 +106,7 @@ namespace QuiddlerLibrary
 
         public string TopDiscard { get; }
 
-        public IPlayer NewPlayer() => new Player();
+        public IPlayer NewPlayer() => new Player(this);
 
         public override string ToString()
         {
@@ -126,6 +126,9 @@ namespace QuiddlerLibrary
             return sb.ToString();
         }
 
+        private void DrawCard()
+        {
 
+        }
     }
 }

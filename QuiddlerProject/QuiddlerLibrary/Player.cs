@@ -7,11 +7,11 @@ namespace QuiddlerLibrary
 {
     class Player : IPlayer, IDisposable
     {
-
-        public Player(Deck d) => _deck = d;
         public int CardCount => _hand.Count;
         public int TotalPoints { get; private set; }
-        
+
+        public Player(Deck d) => _deck = d;
+
         private readonly Deck _deck;
         private readonly List<Card> _hand = new();
         private readonly Application spellChecker = new();

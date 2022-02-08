@@ -4,6 +4,7 @@
  * Authors:     Michael Nogueira, Alex D
  * Description: This class represents a Card object in the Quiddler library
  */
+
 using System.Collections.Generic;
 
 namespace QuiddlerLibrary

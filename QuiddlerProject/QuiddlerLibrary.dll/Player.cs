@@ -8,6 +8,8 @@ namespace QuiddlerLibrary
 {
     class Player : IPlayer
     {
+        private Deck _deck;
+        public Player(Deck deck) => _deck = deck;
         public int CardCount => throw new NotImplementedException();
 
         public int TotalPoints => throw new NotImplementedException();

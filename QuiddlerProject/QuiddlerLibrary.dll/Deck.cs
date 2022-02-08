@@ -92,11 +92,39 @@ namespace QuiddlerLibrary
 
         public int CardCount => throw new NotImplementedException();
 
-        public int CardsPerPlayer { get; set; }
+        public int CardsPerPlayer 
+        {
+            get => CardsPerPlayer;
 
-        public string TopDiscard => throw new NotImplementedException();
+            set
+            {
+                if (value > 10 || value < 3)
+                    throw new ArgumentOutOfRangeException(
+                        message: "Cards per player must be between 3-10 inclusive.", paramName: nameof(value));
+            }
+        }
+
+        public string TopDiscard { get; }
 
         public IPlayer NewPlayer() => new Player();
+
+        public override string ToString()
+        {
+            int cardsPerLine = 8;
+            int cardsPrinted = 0;
+            StringBuilder sb = new();
+            foreach(Card card in _cards )
+            {
+                if(cardsPrinted >= cardsPerLine)
+                {
+                    sb.Append("\n");
+                    cardsPrinted = 0;
+                }                    
+                sb.Append(card);
+                ++cardsPrinted;
+            }
+            return sb.ToString();
+        }
 
 
     }

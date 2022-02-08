@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuiddlerLibrary.dll\QuiddlerLibrary.csproj" />
+    <ProjectReference Include="..\QuiddlerLibrary\QuiddlerLibrary.csproj" />
   </ItemGroup>
 
 </Project>

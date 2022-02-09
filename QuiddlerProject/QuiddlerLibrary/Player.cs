@@ -44,6 +44,7 @@ namespace QuiddlerLibrary
         public string PickupTopDiscard()
         {
             var card = new Card(_deck.TopDiscard);
+
             _hand.Add(card);
             return card.ToString();
         }
@@ -61,19 +62,25 @@ namespace QuiddlerLibrary
 
         public int TestWord(string candidate)
         {
-            string[] candidateCards = candidate.Split(" ");
-            if (candidateCards.Length == _hand.Count) return 0;
+            string[] candidateCards = candidate.Trim().Split(" ");
+            if (candidateCards.Length == _hand.Count)
+                return 0;
 
             var handDictionary = new Dictionary<string, int>();
-            foreach(var card in candidateCards)
-                handDictionary[card]++;
+            foreach (var card in _hand)
+                if ((!handDictionary.TryGetValue(card._rank, out int value)))
+                    handDictionary.Add(card._rank, value);
+                else handDictionary[card._rank]++;
 
             var candidateDictionary = new Dictionary<string, int>();
             foreach (var card in candidateCards)
-                candidateDictionary[card]++;
+                if ((!candidateDictionary.TryGetValue(card, out int value)))
+                    candidateDictionary.Add(card, value);
+                else candidateDictionary[card]++;
 
-            foreach(var card in candidateDictionary)
-                if (handDictionary[card.Key] != card.Value) return 0;
+            foreach (var card in candidateDictionary)
+                if (!(handDictionary.TryGetValue(card.Key, out int value) && value >= card.Value))
+                    return 0;
 
             if (!spellChecker.CheckSpelling(candidate.ToLower().Replace(" ", "")))
                 return 0;
@@ -94,8 +101,10 @@ namespace QuiddlerLibrary
         private static int CalculateScore(string word)
         {
             int score = 0;
-            foreach(string letter in word.Split(' '))
-                score += Card._cardValues[letter];
+            foreach (string letter in word.Split(' '))
+                score += (Card._cardValues.TryGetValue(letter, out int value)
+                    ? value
+                    : 0);
             return score;
         }
 

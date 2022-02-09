@@ -44,7 +44,7 @@ namespace QuiddlerLibrary
         private readonly List<Card> _cards = new();
         private int _cardIndex = 0;
         private int _cardsPerPlayer = 0;
-        private string _topDiscard = "";
+        private string _topDiscard;
 
         /// <summary>
         ///     Populates new Player object using CardsPerPlayer prop
@@ -62,7 +62,7 @@ namespace QuiddlerLibrary
         public override string ToString()
         {
             StringBuilder sb = new();
-            var availableCards = new Dictionary<string, int>();
+            var availableCards = new SortedDictionary<string, int>();
 
             for(int i = _cardIndex; i < _cards.Count; i++)
             {

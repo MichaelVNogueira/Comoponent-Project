@@ -1,7 +1,7 @@
 ﻿/*
  * File:        Deck.cs
  * Date:        2022-02-08
- * Authors:     Michael N, Alex D
+ * Authors:     Michael Nogueira, Alex Mendez
  * Description: This class reperesents a deck of quiddler cards used in the QuiddlerLibrary
  */
 
@@ -14,28 +14,28 @@ namespace QuiddlerLibrary
 {
     public class Deck : IDeck
     {
-        public string About => "Test Client for: Quiddler (TM) Library, © 2022 Michael Nogueira/Alex D";
+        public string About => "Test Client for: Quiddler (TM) Library, © 2022 Michael Nogueira / Alex Mendez";
         public int CardCount => _cards.Count - _cardIndex;
         public string TopDiscard
         {
             get
             {
-                if (TopDiscard == null)
-                    TopDiscard = DrawCard().ToString();
-                return TopDiscard;
+                if (_topDiscard == null)
+                    _topDiscard = DrawCard().ToString();
+                return _topDiscard;
             }
-            internal set { }
+            internal set { _topDiscard = value; }
         }
         public int CardsPerPlayer
         {
-            get => CardsPerPlayer;
-
+            get => _cardsPerPlayer;
             set
             {
                 if (value > 10 || value < 3)
                     throw new ArgumentOutOfRangeException(
                         message: "Cards per player must be between 3-10 inclusive.", paramName: nameof(value)
                     );
+                else _cardsPerPlayer = value;
             }
         }
         public Deck()
@@ -43,14 +43,18 @@ namespace QuiddlerLibrary
             foreach (var key in Card._cardCounts.Keys)
                 for (int i = 0; i < Card._cardCounts[key]; i++)
                     _cards.Add(new Card(key));
+            ShuffleDeck();
         }
 
 
         private readonly List<Card> _cards = new();
         private int _cardIndex = 0;
+        private int _cardsPerPlayer = 0;
+        private string _topDiscard = "";
 
         /// <summary>
-        ///     Creates a new Player object and returns it
+        ///     Populates new Player object using CardsPerPlayer prop
+        ///     then returns the Player.
         /// </summary>
         /// <returns><see cref="IPlayer"/></returns>
         public IPlayer NewPlayer()
@@ -93,5 +97,17 @@ namespace QuiddlerLibrary
         /// </summary>
         /// <returns><see cref="Card"/></returns>
         internal Card DrawCard() => _cards.ElementAt(_cardIndex++);
+
+        private void ShuffleDeck()
+        {
+            var random = new Random();
+            for(int i = _cards.Count - 1; i > 0; i--)
+            {
+                int rng = random.Next(i);
+                var tempCard = _cards[rng];
+                _cards[rng]= _cards[i];
+                _cards[i] = tempCard;
+            }
+        }
     }
 }

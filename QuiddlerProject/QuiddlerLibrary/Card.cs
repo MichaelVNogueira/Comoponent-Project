@@ -1,7 +1,7 @@
 ﻿/*
  * File:        Card.cs
  * Date:        2022-02-08
- * Authors:     Michael Nogueira, Alex D
+ * Authors:     Michael Nogueira, Alex Mendez
  * Description: This class represents a Card object in the Quiddler library
  */
 

@@ -1,4 +1,11 @@
-﻿namespace QuiddlerLibrary
+﻿/*
+ * File         IDeck.cs
+ * Date:        2022-02-08
+ * Authors      Michael Nogueira, Alex Mendez
+ * Description: This interface exposes functionality of the Deck object in the QuiddlerLibrary
+ */
+
+namespace QuiddlerLibrary
 {
     public interface IPlayer
     {

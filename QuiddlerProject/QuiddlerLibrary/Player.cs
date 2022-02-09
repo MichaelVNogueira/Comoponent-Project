@@ -2,6 +2,7 @@
 using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace QuiddlerLibrary
 {
@@ -78,6 +79,16 @@ namespace QuiddlerLibrary
                 return 0;
 
             return CalculateScore(candidate.ToLower());
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new("[");
+            int i;
+            for(i = 0; i < _hand.Count - 1; i++)
+                sb.Append($"{_hand[i]} ");
+            sb.Append($"{_hand[i]}]");
+            return sb.ToString();
         }
 
         private static int CalculateScore(string word)

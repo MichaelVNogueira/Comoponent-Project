@@ -11,7 +11,7 @@ namespace QuiddlerLibrary
 {
     class Card
     {
-        internal static readonly Dictionary<string, ushort> _cardCounts = new()
+        internal static readonly Dictionary<string, int> _cardCounts = new()
         {
             { "a", 10 },
             { "b", 2 },
@@ -46,7 +46,7 @@ namespace QuiddlerLibrary
             { "z", 2 }
 
         };
-        internal static readonly Dictionary<string, ushort> _cardValues = new()
+        internal static readonly Dictionary<string, int> _cardValues = new()
         {
             { "a", 2 },
             { "b", 8 },
@@ -82,7 +82,7 @@ namespace QuiddlerLibrary
         };
 
         internal string _rank;
-        internal ushort _value;
+        internal int _value;
 
         internal Card(string rank)
         {

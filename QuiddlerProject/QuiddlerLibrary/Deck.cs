@@ -18,13 +18,8 @@ namespace QuiddlerLibrary
         public int CardCount => _cards.Count - _cardIndex;
         public string TopDiscard
         {
-            get
-            {
-                if (_topDiscard == null)
-                    _topDiscard = DrawCard().ToString();
-                return _topDiscard;
-            }
-            internal set { _topDiscard = value; }
+            get => _topDiscard ??= DrawCard().ToString();
+            internal set {}
         }
         public int CardsPerPlayer
         {
@@ -45,7 +40,6 @@ namespace QuiddlerLibrary
                     _cards.Add(new Card(key));
             ShuffleDeck();
         }
-
 
         private readonly List<Card> _cards = new();
         private int _cardIndex = 0;
@@ -93,11 +87,14 @@ namespace QuiddlerLibrary
         }
 
         /// <summary>
-        ///     draws a card from the deck
+        ///     Draws a card from the deck
         /// </summary>
         /// <returns><see cref="Card"/></returns>
         internal Card DrawCard() => _cards.ElementAt(_cardIndex++);
 
+        /// <summary>
+        ///     Shuffles the list of cards
+        /// </summary>
         private void ShuffleDeck()
         {
             var random = new Random();

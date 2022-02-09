@@ -54,9 +54,9 @@ namespace QuiddlerLibrary
             int points = TestWord(candidate);
             if(points <= 0) return 0;
             foreach (string card in candidate.Split(' '))
-                foreach (var handCard in _hand)
-                    if (handCard._value.Equals(card))
-                        _hand.Remove(handCard);
+                for(int i = 0; i < _hand.Count; i++)
+                    if (_hand[i]._rank.Equals(card))
+                        _hand.Remove(_hand[i]);
             return TotalPoints += points;
         }
 
